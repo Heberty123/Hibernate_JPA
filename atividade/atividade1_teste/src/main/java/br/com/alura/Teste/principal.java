@@ -21,9 +21,9 @@ public class principal {
 		
 		entityPeople.insert(people);
 		
-		entityPeople.deleteById(1l);
+		//People people1 = entityPeople.selectById(1l);
 		
-		People people1 = entityPeople.selectById(1l);
+		entityPeople.deleteById(1l);
 		
 		List<People> lista = entityPeople.selectByNome("Amélia");
 		

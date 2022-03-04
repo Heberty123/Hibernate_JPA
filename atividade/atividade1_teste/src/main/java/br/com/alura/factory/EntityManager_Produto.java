@@ -37,12 +37,13 @@ public class EntityManager_Produto {
 	}
 	
 	
+	//erro
 	public void deleteById(Long id) {
 		People people = em.find(People.class, id);
 		System.out.println("Encontrado para remover: name: " + people.getName() + " Age: " + people.getAge());
-		people = this.em.merge(people);
 		this.em.remove(people);
 		this.em.flush();
+		this.em.clear();
 	}
 	
 	
