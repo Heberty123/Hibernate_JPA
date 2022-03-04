@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 import br.com.alura.Modelo.People;
 
-public class EntityManager_Produto {
+public class EntityManager_People {
 	
 	private EntityManager em = (Persistence.createEntityManagerFactory("teste01").createEntityManager());
 				
@@ -27,13 +27,13 @@ public class EntityManager_Produto {
 	
 	public List<People> selectAll() { 
 		String jpql = "SELECT p FROM People p";
-		return em.createQuery(jpql).getResultList();	
+		return em.createQuery(jpql, People.class).getResultList();	
 	}
 	
 	
 	public List<People> selectByNome(String name) { 
 		String jpql = "SELECT p FROM People p WHERE p.name = :name";
-		return em.createQuery(jpql).setParameter("name", name).getResultList();	
+		return em.createQuery(jpql, People.class).setParameter("name", name).getResultList();	
 	}
 	
 	
@@ -42,8 +42,7 @@ public class EntityManager_Produto {
 		People people = em.find(People.class, id);
 		System.out.println("Encontrado para remover: name: " + people.getName() + " Age: " + people.getAge());
 		this.em.remove(people);
-		this.em.flush();
-		this.em.clear();
+		this.em.getTransaction().commit();
 	}
 	
 	
