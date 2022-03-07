@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,24 +16,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "pedidos")
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal = BigDecimal.ZERO;
-	private LocalDate dataCadastro = LocalDate.now();
-	
+	private LocalDate data = LocalDate.now();
+
 	@ManyToOne
 	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itens = new ArrayList<>();
-	
-	public Pedido() {}
-	
+
+	public Pedido() {
+	}
+
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -62,21 +61,20 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public Cliente getCliente() {
 		return cliente;
 	}
-	
-	
-	
-	
-	
-	
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 }

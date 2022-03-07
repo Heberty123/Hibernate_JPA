@@ -31,13 +31,24 @@ public class CadastroDePedido {
 		
 
 		Pedido pedido = new Pedido(cliente);
-		pedido.adicionarItem(new ItemPedido(123, pedido, produto));
+		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
 		
 
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastrar(pedido);
 		
 		em.getTransaction().commit();
+		
+		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
+		System.out.println("VALOR TOTAL: " + totalVendido);
+		
+		List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
+		
+		for (Object[] obj : relatorio) {
+			System.out.println(obj[0]);
+			System.out.println(obj[1]);
+			System.out.println(obj[2]);
+		}
 	}
 	
 	private static void popularBancoDeDados() {
