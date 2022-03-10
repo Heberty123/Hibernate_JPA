@@ -1,6 +1,7 @@
 package br.com.alura.loja.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,25 +16,44 @@ import br.com.alura.loja.util.JPAUtil;
 public class Principal {
 	
 	   public static void main(String[] args) {
-		   	Categoria celulares = new Categoria("CELULARES");
-
-	            EntityManager em = JPAUtil.getEntityManager();            	    
-	            em.getTransaction().begin();
-	            	    
-	            em.persist(celulares);
-	            celulares.setNome("atualizao");
-	            	    
-	            em.flush();
-	            em.clear();
-	            
-	            celulares = em.merge(celulares);
-	            celulares.setNome("1234");
-	            em.flush();
-	            em.clear();
-	            celulares = em.merge(celulares);
-	            em.remove(celulares);
-	            em.flush();		
+		   	cadastrarProduto();
+		   	EntityManager em = JPAUtil.getEntityManager();  
+		   	ProdutoDao produtoDao = new ProdutoDao(em);
+		   	Produto p = produtoDao.buscarPorId(1l);
+		   	System.out.println(p.getPreco());
+		   	
+		   	List<Produto> todos = produtoDao.buscarPorNomeDaCategoria("CELULARES");
+		   	todos.forEach(p2 -> System.out.println(p2.getNome()));
+		   	
+		   	BigDecimal precoDoProduto = produtoDao.buscarPrecoDoProdutoComNome("Meu");
+		   	System.out.println("preço do produto: " + precoDoProduto);
        	    }
+
+	private static void cadastrarProduto() {
+		Categoria celulares = new Categoria("CELULARES");
+		Produto produto = new Produto("Meu", "Certiii", new BigDecimal("1000"), celulares);
+
+		    EntityManager em = JPAUtil.getEntityManager();            	    
+		    em.getTransaction().begin();
+		    	    
+		    em.persist(celulares);
+		    em.persist(produto);
+		    celulares.setNome("20987");
+		    
+		    
+		    em.flush();
+		    em.getTransaction().commit();
+		    em.clear();
+		    
+		    
+/*	            celulares = em.merge(celulares);
+		    celulares.setNome("1234");
+		    em.flush();
+		    em.clear();
+		    celulares = em.merge(celulares);
+		    em.remove(celulares);
+		    em.flush();		 */
+	}
 
 }
 
