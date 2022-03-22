@@ -10,7 +10,11 @@
         	<properties>
                 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
                 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/teste01"/>
+<<<<<<< HEAD
                 <property name="javax.persistence.jdbc.username" value="heberty"/>
+=======
+                <property name="javax.persistence.jdbc.username" value="root"/>
+>>>>>>> 47983386a6aab850d7e91f68ce51fe4f38a1bfd6
 				<property name="javax.persistence.jdbc.password" value="Elokonamoda15@"/>
 				<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 				<property name="hibernate.show_sql" value="true"/>
