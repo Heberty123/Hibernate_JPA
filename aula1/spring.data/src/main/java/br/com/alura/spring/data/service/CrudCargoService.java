@@ -50,7 +50,8 @@ public class CrudCargoService {
 	
 	private void salvar(Scanner scanner) {
 		System.out.println("Descricao do cargo");
-		String descricao = scanner.next();
+		scanner.nextLine();
+		String descricao = scanner.nextLine();
 		Cargo cargo = new Cargo();
 		cargo.setDescricao(descricao);
 		cargoRepository.save(cargo);

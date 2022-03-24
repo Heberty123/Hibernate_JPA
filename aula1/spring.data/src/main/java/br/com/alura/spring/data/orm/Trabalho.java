@@ -61,6 +61,16 @@ public class Trabalho {
 	}
 
 
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Trabalho [id=" + id + ", descricao=" + descricao + ", endereco=" + endereco + "]";
